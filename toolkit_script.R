@@ -15,7 +15,8 @@ colnames(dc_traps)
 ggmap(dc_map) + geom_point(data = dc_traps, aes(x = LONGITUDE, y = LATITUDE), col = "red")
 
 #Map colored by trap type
-ggmap(dc_map) + geom_point(data = dc_traps, aes(x = LONGITUDE, y = LATITUDE, col = TRAPTYPE)) + theme_bw()
+ggmap(dc_map) + geom_point(data = dc_traps, aes(x = LONGITUDE, y = LATITUDE, col = TRAPTYPE)) + theme_bw() #+
+#scale_color_discrete(name = "Trap Type") + ggtitle("Mosquito Trap Types in DC")
 
 #Male mosquitoes map
 ggmap(dc_map) + geom_point(data = dc_traps, aes(x = LONGITUDE, y = LATITUDE, size = MALESCOLLE), col = "blue") + theme_bw() +
@@ -36,4 +37,8 @@ grid.arrange(female_map, male_map, ncol = 2)
 #Heatmap
 
 ggmap(dc_map) + stat_density_2d(geom = "polygon", data = dc_traps, aes(x = LONGITUDE, y = LATITUDE, fill = stat(level))) +
+  scale_fill_viridis_c()
+
+#Increase Alpha
+ggmap(dc_map) + stat_density_2d(geom = "polygon", data = dc_traps, aes(x = LONGITUDE, y = LATITUDE, fill = stat(level)), alpha = 0.5) +
   scale_fill_viridis_c()
